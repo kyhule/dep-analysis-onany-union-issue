@@ -6,6 +6,29 @@ plugins {
     id 'com.autonomousapps.dependency-analysis' version '1.0.0-rc05'
 }
 
+dependencyAnalysis {
+    issues {
+        all {
+            // setting this supersedes any finer-grain configurations that set a higher severity
+            onAny {
+                severity("ignore")
+            }
+
+            // these don't do anything
+            onUnusedDependencies {
+                severity("fail")
+            }
+            onUnusedAnnotationProcessors {
+                severity("fail")
+            }
+            onRedundantPlugins {
+                severity("fail")
+            }
+        }
+    }
+}
+
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
